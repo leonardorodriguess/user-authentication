@@ -1,12 +1,16 @@
 import Fastify from 'fastify';
+import { userRoute } from './routes';
+
 
 const server = Fastify()
 
-server.get('/funcionando', async function aleatorio(request, respose) {
-  return { status: "funcionando rota " }
+server.get('/funcionando', async function (request, respose) {
+  return { status: "funcionando " };
 })
 
 async function main() {
+
+  server.register(userRoute, {prefix: 'api/users'})
   
   try{
     await server.listen(3000, '0.0.0.0');
