@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { userRoute } from './routes';
+import { userSchemas } from './schemas/user/user.shema';
 
 
 const server = Fastify()
@@ -9,6 +10,10 @@ server.get('/funcionando', async function (request, respose) {
 })
 
 async function main() {
+
+  for(const schema of userSchemas) {
+    server.addSchema(schema);
+  }
 
   server.register(userRoute, {prefix: 'api/users'})
   
